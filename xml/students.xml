@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="students.xsl"?>
+<!DOCTYPE students SYSTEM "students.dtd">
+<students>
+    <student>
+        <name>Arun Kumar</name>
+        <regno>101</regno>
+        <department>Information Technology</department>
+    </student>
+    <student>
+        <name>Priya</name>
+        <regno>102</regno>
+        <department>Computer Science</department>
+    </student>
+    <student>
+        <name>Rahul</name>
+        <regno>103</regno>
+        <department>Electronics</department>
+    </student>
+</students>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studentApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Management System</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="studentCtrl">
+<header>
+  <h1>Student Management System</h1>
+  <nav>
+    <button ng-click="goTo('home')">Home</button>
+    <button ng-click="goTo('add')">Add Student</button>
+    <button ng-click="goTo('view')">View Students</button>
+  </nav>
+</header>
+<main class="container">
+  <section ng-show="page === 'home'">
+    <h2>Home / Dashboard</h2>
+    <p>Welcome to the Student Management System.</p>
+    <div class="card"><h3>Total Students</h3><h1>{{students.length}}</h1></div>
+    <button ng-click="goTo('add')">Register Student</button>
+    <button ng-click="goTo('view')">View Student Records</button>
+  </section>
+
+  <section ng-show="page === 'add'">
+    <h2>{{editingId ? 'Update Student' : 'Add Student'}}</h2>
+    <form ng-submit="saveStudent()">
+      <label for="name">Student Name</label>
+      <input id="name" type="text" ng-model="form.name" required>
+      <label for="regno">Register Number</label>
+      <input id="regno" type="text" ng-model="form.regno" required>
+      <label for="department">Department</label>
+      <input id="department" type="text" ng-model="form.department" required>
+      <button id="save-button" type="submit">{{editingId ? 'Update Student' : 'Add Student'}}</button>
+      <button type="button" class="secondary" ng-click="resetForm()">Clear</button>
+    </form>
+    <p class="message" ng-class="{'error': isError}" ng-if="message">{{message}}</p>
+  </section>
+
+  <section ng-show="page === 'view'">
+    <h2>View / Search Students</h2>
+    <div class="search-box">
+      <input id="searchName" type="text" ng-model="searchName" placeholder="Enter student name">
+      <button ng-click="searchStudent()">Search</button>
+      <button class="secondary" ng-click="clearSearch()">Show All</button>
+    </div>
+    <p class="message" ng-class="{'error': isError}" ng-if="message">{{message}}</p>
+    <table>
+      <thead><tr><th>Name</th><th>Register Number</th><th>Department</th><th>Actions</th></tr></thead>
+      <tbody>
+        <tr ng-repeat="s in filteredStudents track by s._id">
+          <td>{{s.name}}</td><td>{{s.regno}}</td><td>{{s.department}}</td>
+          <td>
+            <button class="secondary" ng-click="editStudent(s)">Edit</button>
+            <button class="danger" ng-click="deleteStudent(s)">Delete</button>
+          </td>
+        </tr>
+        <tr ng-if="filteredStudents.length === 0"><td colspan="4">No students found</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+<footer>Student Management System </footer>
+<script src="app.js"></script>
+</body>
+</html>

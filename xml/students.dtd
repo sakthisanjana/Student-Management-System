@@ -1,0 +1,5 @@
+<!ELEMENT students (student+)>
+<!ELEMENT student (name, regno, department)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT regno (#PCDATA)>
+<!ELEMENT department (#PCDATA)>
